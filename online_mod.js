@@ -14477,7 +14477,7 @@
 
       this.vcdn_api_search = function (api, data, callback, error) {
         var prox = this.proxy('videocdn');
-        var url = (prefer_http ? 'http:' : 'https:') + '//videocdn.tv/api/';
+        var url = 'https://videocdn.tv/api/';
         network.clear();
         network.timeout(1000 * 20);
         network.silent(prox + url + api, function (json) {
