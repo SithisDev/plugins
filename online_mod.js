@@ -335,30 +335,31 @@
           var src = iframe_src ? iframe_src : Lampa.Utils.addUrlComponent(embed, (+kinopoisk_id ? 'kp_id=' : 'imdb_id=') + kinopoisk_id);
           console.log('START SEARCH ', 'error:', error, 'iframe_src:', iframe_src, 'src:', src);
           
-setTimeout(function() {
-    videocdn_search(src, function(str) {
-
-        setTimeout(function() {
-        if (str) {
-            parse(str);
-            console.log('SEARCH if 1 ', 'str:', str);
-        } else if (!iframe_src && !object.clarification && object.movie.imdb_id && kinopoisk_id != object.movie.imdb_id) {
-            var src2 = Lampa.Utils.addUrlComponent(embed, 'imdb_id=' + object.movie.imdb_id);
-            console.log('SEARCH else 1 ', 'src2:', src2);
-            videocdn_search(src2, function(str) {
-                if (str) {
-                    parse(str);
-                    console.log('SEARCH if 2 ', 'str:', str);
-                } else component.emptyForQuery(select_title);
-                console.log('SEARCH else 2 ', 'select_title:', select_title);
-            }, error);
-        } else component.emptyForQuery(select_title);
-        console.log('SEARCH else 3 ', 'select_title:', select_title);
-            }, 1000);
-        
-    }, error);
-}, 1000);
-          
+      this.search = function(_object, kinopoisk_id, data) {
+          object = _object;
+          select_title = object.search || object.movie.title;
+          var error = component.empty.bind(component);
+          var iframe_src = data[0] && data[0].iframe_src;
+          var src = iframe_src ? iframe_src : Lampa.Utils.addUrlComponent(embed, (+kinopoisk_id ? 'kp_id=' : 'imdb_id=') + kinopoisk_id);
+          console.log('START SEARCH ', 'error:', error, 'iframe_src:', iframe_src, 'src:', src);
+          videocdn_search(src, function(str) {
+              if (str) {
+                  parse(str);
+                  console.log('SEARCH if 1', 'str:', str);
+              } else if (!iframe_src && !object.clarification && object.movie.imdb_id && kinopoisk_id != object.movie.imdb_id) {
+                  var src2 = Lampa.Utils.addUrlComponent(embed, 'imdb_id=' + object.movie.imdb_id);
+                  console.log('SEARCH else 1', 'src2:', src2);
+                  videocdn_search(src2, function(str) {
+                      if (str) {
+                          parse(str);
+                          console.log('SEARCH if 2', 'str:', str);
+                      } else component.emptyForQuery(select_title);
+                      console.log('SEARCH else 2', 'select_title:', select_title);
+                  }, error);
+              } else component.emptyForQuery(select_title);
+              console.log('SEARCH else 3', 'select_title:', select_title);
+              parse(str);
+          }, error);
       };
 
       this.extendChoice = function (saved) {
