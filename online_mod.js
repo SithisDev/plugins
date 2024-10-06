@@ -269,6 +269,7 @@
     }
 
     function videocdn(component, _object) {
+        console.log('START videocdn');
       var network = new Lampa.Reguest();
       var extract = {};
       var object = _object;
@@ -292,9 +293,11 @@
       };
 
       function videocdn_search(iframe_src, callback, error) {
+          console.log('START videocdn_search');
         var url = 'https:' + iframe_src;
 
         var error_check = function error_check(a, c) {
+            console.log('START error_check');
           if (a.status == 404 || a.status == 0 && a.statusText !== 'timeout') {
             if (callback) callback('');
           } else if (error) error(network.errorDecode(a, c));
@@ -360,6 +363,7 @@
       };
 
       this.extendChoice = function (saved) {
+          console.log('START saved');
         Lampa.Arrays.extend(choice, saved, true);
       };
       /**
@@ -368,6 +372,7 @@
 
 
       this.reset = function () {
+          console.log('START reset');
         component.reset();
         choice = {
           season: 0,
@@ -388,6 +393,7 @@
 
 
       this.filter = function (type, a, b) {
+          console.log('START type');
         choice[a.stype] = b.index;
 
         if (a.stype == 'voice') {
@@ -406,6 +412,7 @@
 
 
       this.destroy = function () {
+          console.log('START destroy');
         network.clear();
         extract = null;
       };
@@ -417,6 +424,7 @@
 
 
       function extractItems(str) {
+          console.log('START extractItems');
         if (!str) return [];
 
         try {
@@ -445,6 +453,7 @@
       }
 
       function decode(pass, src) {
+          console.log('START decode');
         var pass_len = pass.length;
         var pass_arr = Array.from(pass, function (c) {
           return c.charCodeAt(0);
@@ -465,6 +474,7 @@
       }
 
       function parse(str) {
+          console.log('START parse');
         component.loading(false);
         str = (str || '').replace(/\n/g, '');
         var voices = str.match(/<div class="translations">\s*(<select>.*?<\/select>)/);
@@ -638,6 +648,7 @@
 
 
       function getFile(element, max_quality) {
+          console.log('START getFile');
         var file = '';
         var items = element.media && element.media.items;
         var quality = false;
@@ -671,6 +682,7 @@
 
 
       function filter() {
+          console.log('START filter');
         filter_items = {
           season: extract.season_num.map(function (s) {
             return Lampa.Lang.translate('torrent_serial_season') + ' ' + s;
@@ -786,6 +798,7 @@
 
 
       function append(items) {
+          console.log('START append');
         component.reset();
         var viewed = Lampa.Storage.cache('online_view', 5000, []);
         var last_episode = component.getLastEpisode(items);
