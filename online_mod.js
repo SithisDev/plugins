@@ -331,7 +331,12 @@
           select_title = object.search || object.movie.title;
           var error = component.empty.bind(component);
           var iframe_src = data[0] && data[0].iframe_src;
+          var randomNumber = Math.floor(Math.random() * 1000000); // Генерирует случайное число от 0 до 999999
           var src = iframe_src ? iframe_src : Lampa.Utils.addUrlComponent(embed, (+kinopoisk_id ? 'kp_id=' : 'imdb_id=') + kinopoisk_id);
+
+          // Добавляем случайное число в конец src
+          src += '?random=' + randomNumber;
+          
           console.log('START SEARCH ', 'error:', error, 'iframe_src:', iframe_src, 'src:', src);
           videocdn_search(src, function(str) {
               if (str) {
@@ -350,7 +355,6 @@
               } else {
                   component.emptyForQuery(select_title);
                   console.log('SEARCH else 3', 'select_title:', select_title);
-                  parse(str);
               }
           }, error);
       };
