@@ -292,7 +292,7 @@
       };
 
       function videocdn_search(iframe_src, callback, error) {
-        var url = (window.location.protocol === 'https:' && !prox ? 'https:' : 'http:') + iframe_src;
+        var url = 'https:' + iframe_src;
 
         var error_check = function error_check(a, c) {
           if (a.status == 404 || a.status == 0 && a.statusText !== 'timeout') {
