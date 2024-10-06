@@ -325,15 +325,6 @@
        * @param {Object} _object
        * @param {String} kinopoisk_id
        */
-
-
-      this.search = function(_object, kinopoisk_id, data) {
-          object = _object;
-          select_title = object.search || object.movie.title;
-          var error = component.empty.bind(component);
-          var iframe_src = data[0] && data[0].iframe_src;
-          var src = iframe_src ? iframe_src : Lampa.Utils.addUrlComponent(embed, (+kinopoisk_id ? 'kp_id=' : 'imdb_id=') + kinopoisk_id);
-          console.log('START SEARCH ', 'error:', error, 'iframe_src:', iframe_src, 'src:', src);
           
       this.search = function(_object, kinopoisk_id, data) {
           object = _object;
