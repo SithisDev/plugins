@@ -356,9 +356,11 @@
                       } else component.emptyForQuery(select_title);
                       console.log('SEARCH else 2', 'select_title:', select_title);
                   }, error);
-              } else component.emptyForQuery(select_title);
-              console.log('SEARCH else 3', 'select_title:', select_title);
-              parse(str);
+              } else {
+                  component.emptyForQuery(select_title);
+                  console.log('SEARCH else 3', 'select_title:', select_title);
+                  parse(str);
+              }
           }, error);
       };
 
