@@ -280,7 +280,7 @@
       var prefer_http = Lampa.Storage.field('online_mod_prefer_http') === true;
       var prefer_mp4 = Lampa.Storage.field('online_mod_prefer_mp4') === true;
       var prox = component.proxy('svetacdn');
-      var host = (prefer_http ? 'http:' : 'https:') + '//videocdn.tv';
+      var host = 'https://videocdn.tv';
       var ref = host + '/';
       var embed = '//93703.svetacdn.in/0HlZgU1l1mw5';
       var filter_items = {};
